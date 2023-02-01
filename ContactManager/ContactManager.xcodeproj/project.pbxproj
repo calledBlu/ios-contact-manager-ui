@@ -31,6 +31,7 @@
 		F042BC1E29541C2B00722285 /* Detector.swift in Sources */ = {isa = PBXBuildFile; fileRef = F042BC1D29541C2B00722285 /* Detector.swift */; };
 		F042BC2029541E3200722285 /* Converter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F042BC1F29541E3200722285 /* Converter.swift */; };
 		F0873C53295A8AC00097B804 /* ContactManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0873C52295A8AC00097B804 /* ContactManager.swift */; };
+		F0902055298A4ED700A37A8C /* AddNewContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0902054298A4ED700A37A8C /* AddNewContactViewController.swift */; };
 		F0A68C2A29555F6C00815CD6 /* InputPossible.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A68C2929555F6C00815CD6 /* InputPossible.swift */; };
 		F0A68C2D29556D7D00815CD6 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A68C2C29556D7D00815CD6 /* Checker.swift */; };
 		F0CF96482989F03E003183C7 /* Dummy.json in Resources */ = {isa = PBXBuildFile; fileRef = F0CF96472989F03E003183C7 /* Dummy.json */; };
@@ -78,6 +79,7 @@
 		F042BC1D29541C2B00722285 /* Detector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detector.swift; sourceTree = "<group>"; };
 		F042BC1F29541E3200722285 /* Converter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Converter.swift; sourceTree = "<group>"; };
 		F0873C52295A8AC00097B804 /* ContactManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactManager.swift; sourceTree = "<group>"; };
+		F0902054298A4ED700A37A8C /* AddNewContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewContactViewController.swift; sourceTree = "<group>"; };
 		F0A68C2929555F6C00815CD6 /* InputPossible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputPossible.swift; sourceTree = "<group>"; };
 		F0A68C2C29556D7D00815CD6 /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
 		F0CF96472989F03E003183C7 /* Dummy.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Dummy.json; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				F00F75132988A76700612BF3 /* SceneDelegate.swift */,
 				F00F75112988A76700612BF3 /* AppDelegate.swift */,
 				F00F75152988A76700612BF3 /* ContactManagerTableViewController.swift */,
+				F0902054298A4ED700A37A8C /* AddNewContactViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -335,6 +338,7 @@
 				F00F75162988A76700612BF3 /* ContactManagerTableViewController.swift in Sources */,
 				5B1859FD2988AA9400EFC383 /* PrintMessage.swift in Sources */,
 				5B1859FB2988AA8F00EFC383 /* Detector.swift in Sources */,
+				F0902055298A4ED700A37A8C /* AddNewContactViewController.swift in Sources */,
 				5B185A002988AA9C00EFC383 /* SystemMenuWorkable.swift in Sources */,
 				5B1859FF2988AA9A00EFC383 /* InputPossible.swift in Sources */,
 				5B1859F92988AA8B00EFC383 /* ContactInformation.swift in Sources */,

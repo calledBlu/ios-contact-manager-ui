@@ -13,7 +13,7 @@ var ageArray = [String]()
 var phoneNumberArray = [String]()
 
 final class ContactManagerTableViewController: UITableViewController {
-    
+
     @IBOutlet private weak var contactManagerTableView: UITableView!
     private var contactDataSource = ContactDataSource()
     
@@ -44,6 +44,17 @@ final class ContactManagerTableViewController: UITableViewController {
                 phoneNumberArray.append(contactData["phoneNumber"] as! String)
             }
         }
+    }
+
+    @IBAction func tappedAddNewContactButton(_ sender: UIBarButtonItem) {
+        guard let nextViewController = self.storyboard?.instantiateViewController(identifier: "AddNewContactViewController") as? AddNewContactViewController else { return }
+
+        nextViewController.modalTransitionStyle = .coverVertical
+        // modalPresentationStyle이 automatic인 경우 창이 겹쳐보이는 형태로 나오고
+        // fullScreen으로 하는 경우 전체화면으로 보이게끔 나타남!
+        nextViewController.modalPresentationStyle = .automatic
+
+        present(nextViewController, animated: true)
     }
 }
 
