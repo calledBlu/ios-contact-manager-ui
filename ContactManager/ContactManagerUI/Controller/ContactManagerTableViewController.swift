@@ -15,18 +15,18 @@ var phoneNumberArray = [String]()
 final class ContactManagerTableViewController: UITableViewController {
 
     @IBOutlet private weak var contactManagerTableView: UITableView!
-    private var contactDataSource = ContactDataSource()
-    
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.configureTableView()
+        configureTableView()
         parseJSON()
     }
     
     private func configureTableView() {
         tableView.delegate = self
-        tableView.dataSource = self.contactDataSource
+        tableView.dataSource = self
     }
     
     private func parseJSON() {
@@ -56,24 +56,48 @@ final class ContactManagerTableViewController: UITableViewController {
 
         present(nextViewController, animated: true)
     }
-}
 
-final class ContactDataSource: NSObject, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return nameArray.count
     }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellIdentifier = "infoCell"
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-        
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cellIdentifier = "infoCell"
+//        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+        let cell: UITableViewCell = tableView.dequeueReusableCell(for: indexPath)
+
+        // currnent state를 활용해서 configuration을 update해주는 블록
         cell.configurationUpdateHandler = { cell, state in
             var infoContent = cell.defaultContentConfiguration().updated(for: state)
             infoContent.text = "\(nameArray[indexPath.row])(\(ageArray[indexPath.row]))"
             infoContent.secondaryText = phoneNumberArray[indexPath.row]
-            
+
             cell.accessoryType = .disclosureIndicator
             cell.contentConfiguration = infoContent
+        }
+        return cell
+    }
+}
+
+protocol ReusableTableViewCell {
+    static var reuseIdentifier: String { get }
+}
+
+extension ReusableTableViewCell {
+    // 기존의 withIdentifier가 String으로 전달되기 때문에 string 타입을 반환하는 연산 프로퍼티 선언
+    static var reuseIdentifier: String {
+        // 제네릭 타입은 빌드 시점에서 평가되므로 UITableViewCell이 self에 들어가고
+        // "UITableViewCell"이라는 String이 return
+        String(describing: self)
+    }
+}
+
+extension UITableViewCell: ReusableTableViewCell {}
+
+extension UITableView {
+    func dequeueReusableCell<T: UITableViewCell>(for indexPath: IndexPath) -> T {
+        guard let cell = dequeueReusableCell(withIdentifier: T.reuseIdentifier, for: indexPath) as? T else {
+            fatalError("Unable Dequeue Reuseable")
         }
         return cell
     }
