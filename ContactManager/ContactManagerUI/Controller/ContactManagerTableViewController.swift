@@ -64,7 +64,8 @@ final class ContactManagerTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 //        let cellIdentifier = "infoCell"
 //        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-        let cell: UITableViewCell = tableView.dequeueReusableCell(for: indexPath)
+//        let cell: UITableViewCell = tableView.dequeueReusableCell(for: indexPath)
+        let cell = tableView.dequeueReusableCell(cellClass: UITableViewCell.self, for: indexPath)
 
         // currnent state를 활용해서 configuration을 update해주는 블록
         cell.configurationUpdateHandler = { cell, state in
@@ -95,7 +96,7 @@ extension ReusableTableViewCell {
 extension UITableViewCell: ReusableTableViewCell {}
 
 extension UITableView {
-    func dequeueReusableCell<T: UITableViewCell>(for indexPath: IndexPath) -> T {
+    func dequeueReusableCell<T: UITableViewCell>(cellClass: T.Type, for indexPath: IndexPath) -> T {
         guard let cell = dequeueReusableCell(withIdentifier: T.reuseIdentifier, for: indexPath) as? T else {
             fatalError("Unable Dequeue Reuseable")
         }
