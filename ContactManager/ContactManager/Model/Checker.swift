@@ -8,6 +8,17 @@
 import Foundation
 
 class Checker {
+    func checkCorrectInput(target: [String]) -> [Bool] {
+        var checkResult = [Bool]()
+
+        for (inputText, pattern) in zip(target, RegularExpression.allCases) {
+            let isCorrectInput = inputText.range(of: pattern.rawValue, options: .regularExpression) != nil
+            checkResult.append(isCorrectInput)
+        }
+
+        return checkResult
+    }
+
     func checkCorrectWord(target: [String]) -> ContactInformation? {
         var nameValue: String = ""
         var ageValue: String = ""

@@ -10,20 +10,36 @@ import UIKit
 class AddNewContactViewController: UIViewController {
 
     @IBOutlet var userInputTextArray: [UITextField]!
-    private var tempArray = [String]()
-    private let checker = Checker()
+    private let contactManager = ContactManager()
 
     @IBAction func tappedCancelButton(_ sender: UIBarButtonItem) {
         failiureAlert()
     }
 
     @IBAction func tappedSaveButton(_ sender: UIBarButtonItem) {
-        userInputTextArray.forEach { element in
-            guard let temp = element.text else { return }
-            tempArray.append(temp)
+        guard let check = checkUserInput() else { return }
+        var alertIndex: Int?
+
+        for (index, element) in check.enumerated() {
+            if element == false {
+                print("\(index)")
+                alertIndex = index
+                break
+            }
         }
-        var checkeUserInput = checker.checkCorrectWord(target: tempArray)
-        successAlert()
+        
+        switch alertIndex {
+        case 0:
+            successAlert(message: PrintMessage.invalidName.rawValue)
+        case 1:
+            successAlert(message: PrintMessage.invalidAge.rawValue)
+        case 2:
+            successAlert(message: PrintMessage.invalidPhoneNumber.rawValue)
+        case .none:
+            return
+        case .some(_):
+            return
+        }
     }
     
     override func viewDidLoad() {
@@ -32,9 +48,9 @@ class AddNewContactViewController: UIViewController {
 }
 
 extension AddNewContactViewController {
-    private func successAlert() {
+    private func successAlert(message: String) {
         let success = UIAlertAction(title: "확인", style: .default, handler: nil)
-        let alert = UIAlertController(title: nil, message: "Error Case Message 출력", preferredStyle: .alert)
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         
         alert.addAction(success)
         present(alert, animated: true, completion: nil)
@@ -50,5 +66,28 @@ extension AddNewContactViewController {
         alert.addAction(allowAction)
         alert.addAction(cancleAction)
         present(alert, animated: true, completion: nil)
+    }
+
+    private func checkUserInput() -> [Bool]? {
+        var tempArray = [String]()
+
+        for i in 0..<3 {
+            guard var temp = self.userInputTextArray[i].text else { return nil }
+            temp = removeBlankInput(name: temp)
+            tempArray.append(temp)
+        }
+        return contactManager.checker.checkCorrectInput(target: tempArray)
+    }
+
+    private func removeBlankInput(name: String) -> String {
+        let convertedInputName = contactManager.convertor.convertToCharacter(this: name)
+        let removedBlankInputName = contactManager.detector.excludeSpaceWord(convertedInputName)
+        let combinedInputName = contactManager.convertor.convertToString(removedBlankInputName)
+
+        return combinedInputName
+    }
+
+    private func checkInputbyRegularExpression() {
+
     }
 }
