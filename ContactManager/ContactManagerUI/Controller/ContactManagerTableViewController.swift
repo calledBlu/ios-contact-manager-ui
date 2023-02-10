@@ -72,7 +72,7 @@ extension ContactManagerTableViewController: SendContactDataDelegate {
         contactManagerTableView.reloadData()
     }
     
-    func updateModel() {
+    func updateTableView() {
         contactManagerTableView.reloadData()
     }
 }

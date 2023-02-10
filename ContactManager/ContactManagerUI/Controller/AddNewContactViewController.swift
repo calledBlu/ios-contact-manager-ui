@@ -27,7 +27,7 @@ class AddNewContactViewController: UIViewController {
             let sendingContactData = ContactInformation(name: newContactData[0], age: newContactData[1], phoneNumber: newContactData[2])
 
             contactManager.contactInformationArray.insert(sendingContactData)
-            delegate?.updateModel()
+            delegate?.updateTableView()
             
             dismiss(animated: true)
             return
