@@ -20,7 +20,6 @@ final class ContactManagerTableViewController: UITableViewController {
 
         addNewContactVC.modalTransitionStyle = .coverVertical
         addNewContactVC.modalPresentationStyle = .automatic
-
         addNewContactVC.delegate = self
         
         present(addNewContactVC, animated: true)
@@ -42,7 +41,12 @@ final class ContactManagerTableViewController: UITableViewController {
     
     private func assignJSONData() {
         guard let parsedInformation = jsonManagement.parseJSON() else { return }
-        contactInfomation = parsedInformation
+        contactInfomation = removeDuplication(in: parsedInformation)
+    }
+    
+    private func removeDuplication(in model: [ContactInformation]) -> [ContactInformation] {
+        let duplicate = Set(model)
+        return Array(duplicate)
     }
 }
 
