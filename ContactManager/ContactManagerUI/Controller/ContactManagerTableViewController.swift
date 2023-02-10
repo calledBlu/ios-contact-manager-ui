@@ -71,4 +71,8 @@ extension ContactManagerTableViewController: SendContactDataDelegate {
         contactInfomation.append(newData)
         contactManagerTableView.reloadData()
     }
+    
+    func updateModel() {
+        contactManagerTableView.reloadData()
+    }
 }

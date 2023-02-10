@@ -9,4 +9,5 @@ import Foundation
 
 protocol SendContactDataDelegate: AnyObject {
     func sendData(newData: ContactInformation)
+    func updateModel()
 }

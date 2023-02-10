@@ -25,7 +25,8 @@ class AddNewContactViewController: UIViewController {
         if errorMessage.isEmpty {
             let sendingContactData = ContactInformation(name: newContactData[0], age: newContactData[1], phoneNumber: newContactData[2])
 
-            delegate?.sendData(newData: sendingContactData)
+            contactManager.contactInformationArray.insert(sendingContactData)
+            delegate?.updateModel()
             
             dismiss(animated: true)
             return
