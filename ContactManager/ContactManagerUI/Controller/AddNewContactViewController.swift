@@ -8,13 +8,14 @@
 import UIKit
 
 class AddNewContactViewController: UIViewController {
-
+    //MARK: - Property
     @IBOutlet var userInputData: [UITextField]!
     private var newContactData = [String]()
     private let contactManager = ContactManager()
 
     weak var delegate: SendContactDataDelegate?
-
+    
+    //MARK: - BarButtonAction
     @IBAction func tappedCancelButton(_ sender: UIBarButtonItem) {
         cancelConfirmAlert()
     }
@@ -34,11 +35,13 @@ class AddNewContactViewController: UIViewController {
         successAlert(message: errorMessage)
     }
     
+    //MARK: - ViewLifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         excludePhoneNumberTextField()
     }
     
+    //MARK: - Method
     private func excludePhoneNumberTextField() {
         guard let phoneNumberTextField = userInputData.last else { return }
         phoneNumberTextField.delegate = self
@@ -80,6 +83,7 @@ class AddNewContactViewController: UIViewController {
     }
 }
 
+//MARK: - TextFieldDelegate
 extension AddNewContactViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         guard let text = textField.text,
